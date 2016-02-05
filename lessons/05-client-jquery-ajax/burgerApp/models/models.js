@@ -6,6 +6,6 @@ var ingredientSchema = mongoose.Schema({
     outOfStock: Boolean });
 
 
-var Ingredient = mongoose.model('Ingredient', ingredientSchema);
+var Ingredient = mongoose.model('ingredient', ingredientSchema);
 
 module.exports = Ingredient;

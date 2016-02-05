@@ -6,7 +6,7 @@
 var express = require('express');
 var path = require('path');
 var Ingredient = require(path.join(__dirname,'../models/models'));
-
+var Cat = require(path.join(__dirname,'../models/catModel'));
 // mongoose.connect('mongodb://localhost/Ingredient');
 
 var router = express.Router();
@@ -28,25 +28,42 @@ ingredients.listAll = function(req, res){
 
 		if (err) errorHandler(err,req,res);
 
-		console.log(ingredientsList.length)
+		//console.log(ingredientsList.length)
 		ingredientsList.forEach(function (ingredientItem){
-			console.log("itemYo", ingredientItem)
 		})
 		// console.log("LOL", ingredientsObj)
 		// for(var i = 0; i < ingredientsObj.length; i++){
 		// 	listFull.push(ingredientsObj[i]);
 		// };
-	res.render('ingredients', {list: listFull, message:  ingredientsList.length});
+	res.render('ingredients', {list: ingredientsList});
 	});
+
+	
+
+	// var newIngred = new Ingredient({name: 'onion', price: 0.45, outOfStock: false});
+	// newIngred.save();
+
+
 };
 
-// ingredients.addNew = function(req, res){
+//gotta use AJAX
+ingredients.addNew = function(req, res){
+	var name = req.body.name;
+	var price = req.body.price;
+	var newIngred = new Ingredient({name: name, price: price, outOfStock: false});
+	newIngred.save(function (err, ingredient){
+		res.json(ingredient)
+	});
+}
 
-// }
+ingredients.removeOutOfStock = function(req, res){
+	console.log("HELLO");
+	Ingredient.find({outOfStock: true}, function(err, ingredients){
+		console.log('YO', ingredients)
+		res.json(ingredients);
+	})
 
-// ingredients.isOutOfStock = function(req, res){
-
-// }
+}
 
 // ingredients.editIngredients = function(req, res){
 	

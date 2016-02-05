@@ -29,11 +29,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.get('/', index);
 app.get('/ingredients', ingredients.listAll);
+
+app.post('/ingredients', ingredients.addNew);
+app.post('/removeOutOfStock', ingredients.removeOutOfStock);
 // app.get('/kitchen', kitchen);
 // app.get('/order', order);
 
 
-var mongoURI = process.env.MONGOURI || "mongodb://localhost/Ingredient";
+var mongoURI = "mongodb://localhost/test";
 mongoose.connect(mongoURI);
 
 var PORT = process.env.PORT || 3000;
