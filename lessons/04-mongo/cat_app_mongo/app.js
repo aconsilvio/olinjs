@@ -34,6 +34,8 @@ app.get('/cats/bycolor/StripedGray', cats.sortColorStripedGray);
 app.get('/cats/delete/old', cats.deleteCat)
 app.get('/cats/byage/young/bycolor/beige', cats.findColorAge)
 
+// I'd make  ^ route a shorter and more general:
+app.get('/cats/find/:age/:color', cats.findColorAge)
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {

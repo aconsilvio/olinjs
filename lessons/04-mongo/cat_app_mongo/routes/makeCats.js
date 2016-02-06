@@ -34,6 +34,7 @@ cats.catList = function(req, res) {
 	var listFull = [];
 	var listFinal = [];
 	Cat.find({}, function(err, cats){
+		//Why do you take the array of cats, cats, and make the same array over again with listFull?
 		for(var i = 0; i < cats.length; i++){
 			listFull.push(cats[i]);
 		};
@@ -127,7 +128,7 @@ cats.sortColorStripedGray = function(req, res) {
 
 //show cats if the first letter of their name is R or C
 cats.findColorAge = function (req, res){
-	var color = 'Beige';
+	var color = 'Beige'; //req.params.color
 	var listFull = [];
 	var listFinal = [];
 	Cat.find({
@@ -154,6 +155,10 @@ cats.findColorAge = function (req, res){
 cats.deleteCat = function(req, res) {
 	var listFull = [];
 	var oldestCat;
+	// Querying for all of your database and sorting to find the oldest is could get pretty computationally and space intesive. Probably better to just ask for only the oldest cat the first time like:
+	// Cat.findOne().sort('-itemId').exec(function(err, cat) {
+	// 	// cat is the oldest cat <3;
+	// });
 	Cat.find({}, function(err, cats){
 		for(var i = 0; i < cats.length; i++){
 			listFull.push(cats[i]);
@@ -169,6 +174,7 @@ cats.deleteCat = function(req, res) {
 		
 
 		oldestCat = listFull[listFull.length -1];
+		//Just need to remove by specifying one unique value, _id would work pretty well
 		Cat.remove({name: oldestCat.name, age: oldestCat.age, 
 			color: oldestCat.color}, function (err) {
 				res.render('cats', {message: 'You have given away:', message2: [oldestCat.name + ', ' + oldestCat.age + ', ' +oldestCat.color]});
