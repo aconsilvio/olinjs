@@ -30,8 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.get('/', index);
 app.get('/ingredients', ingredients.listAll);
 
-app.post('/ingredients', ingredients.addNew);
+app.post('/ingredients', ingredients.addNewEdit);
 app.post('/removeOutOfStock', ingredients.removeOutOfStock);
+
 // app.get('/kitchen', kitchen);
 // app.get('/order', order);
 

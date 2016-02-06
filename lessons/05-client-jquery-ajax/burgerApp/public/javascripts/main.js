@@ -1,30 +1,50 @@
 var $form = $("#ajax-form");
 var $remove = $("#removeLink");
+var $edit = $("#editStock");
 
 var onSuccess = function(data, status) {
   var $ingredients = $(".ingredients");
 
-  var $tempIngredient = $ingredients.first().clone();
-  var name = $tempIngredient.children(".outOfStock").first();
-  $tempIngredient.children(".name").html(data.name);
-  $tempIngredient.children(".price").html('$' + data.price);
-  $tempIngredient.children(".outOfStock").text('false');
-
-  $ingredients.first().before($tempIngredient);
+  console.log($ingredients.eq(0).children(".name").html(), 'first index of $ingredients')
+  for(var i = 0; i < $ingredients.length; i++){
+    if($ingredients.eq(i).children(".name").html() === data.name){
+      console.log($ingredients.eq(i).children(".name").html(data.name), 'mainjs')
+      $ingredients.eq(i).children(".name").html(data.name)
+      $ingredients.eq(i).children(".price").html('$' + data.price)
+      $ingredients.eq(i).children(".outOfStock").text(data.outOfStock)
+      break;
+    } else{
+      var $tempIngredient = $ingredients.first().clone();
+      // var name = $tempIngredient.children(".outOfStock").first();
+      $tempIngredient.children(".name").html(data.name);
+      $tempIngredient.children(".price").html('$' + data.price);
+      $tempIngredient.children(".outOfStock").text(data.outOfStock);
+      $ingredients.first().before($tempIngredient);
+      break;
+    }
+  }
 };
 
 var onRemove = function(data, status) {
   var $ingredients = $(".ingredients");
-  console.log(data);
+
   data.forEach(function(ingredient){
     for(var i = 0; i < $ingredients.length; i++){
       if ($ingredients.eq(i).children('.name').text() === ingredient.name){ 
         $ingredients.eq(i).remove();
-        console.log($ingredients.eq(i));
       }
     }
   })  
 };
+
+var onEdit = function(data, status) {
+  //select edit buttom and make it submit
+  //make other things forms
+
+  var $ingredients = $(".ingredients");
+  
+};
+
 
 var onError = function(data, status) {
   console.log("status", status);

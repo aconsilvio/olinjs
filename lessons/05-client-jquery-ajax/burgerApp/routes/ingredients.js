@@ -47,27 +47,41 @@ ingredients.listAll = function(req, res){
 };
 
 //gotta use AJAX
-ingredients.addNew = function(req, res){
+//this function will add a new ingredient if it does not exist in the database
+//and it will update the ingredient if it is already in the database
+ingredients.addNewEdit = function(req, res){
 	var name = req.body.name;
 	var price = req.body.price;
-	var newIngred = new Ingredient({name: name, price: price, outOfStock: false});
-	newIngred.save(function (err, ingredient){
-		res.json(ingredient)
-	});
-}
-
-ingredients.removeOutOfStock = function(req, res){
-	console.log("HELLO");
-	Ingredient.find({outOfStock: true}, function(err, ingredients){
-		console.log('YO', ingredients)
-		res.json(ingredients);
+	var outOfStock = req.body.outOfStock;
+	console.log(name);
+	Ingredient.find({name: name}, function(err, ingredient){
+		if(ingredient.length !== 0){
+			if(ingredient[0].name === name){  //assumes there is only ingredient
+				Ingredient.update({name:name},{$set: {price: price, outOfStock:outOfStock}}, 
+					function(err, record){
+						Ingredient.find({name:name}, function(err, output){
+							console.log(output[0], 'output')
+							res.json(output[0])
+						})
+					}				
+				)
+			}
+		} else{
+			var newIngred = new Ingredient({name: name, price: price, outOfStock: outOfStock});
+			newIngred.save(function (err, ingredient){
+			res.json(ingredient)
+			});
+		}
 	})
 
 }
 
-// ingredients.editIngredients = function(req, res){
-	
-// }
+ingredients.removeOutOfStock = function(req, res){
+	Ingredient.find({outOfStock: true}, function(err, ingredients){
+		res.json(ingredients);
+	})
+
+}
 
 
 module.exports = ingredients;
