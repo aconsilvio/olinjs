@@ -1,0 +1,36 @@
+<h1>The Burger Shop</h1>
+	<div class = "two-columns">
+		<table cellpadding="5">
+		  <h2><b>Burger Ingredients</b></h2>
+		  <tr>
+		    <th>Item</th>
+		    <th>Price</th>
+		    <th>Out of Stock</th>
+		  </tr>
+		{{#each list}}
+		  <tr class = "ingredients">
+		    <td class = "name">{{this.name}}</td>
+		    <td class = "price">${{this.price}}</td>
+		    <td class = "outOfStock">{{this.outOfStock}}</td>
+		  </tr>
+		      {{/each}}
+		</table>
+	</div>
+	<div class = "two-columns">
+		<h2> Actions</h2>
+		<h3> Remove Out of Stock Items </h3>
+		<form id ="removeLink" action = "removeOutOfStock" method ="POST">
+			<input type = "submit" value = "Remove Out of Stock Items">
+		</form>
+
+		<h3> Add New Ingredient or Edit Current Ingredient</h3>
+		<p>Filling out this form will add a new ingredient to your list if it doesn't already exist.  If the ingredient is already on the list, you can edit its price and in stock status with the form below.
+		<form id="ajax-form" action="addNewEdit" method="POST">
+		  Name: <input type="text" name="name"/><br/>
+		  Price: <input type="number" name="price"/><br/>
+		  Out Of Stock:   <input type="radio" name="outOfStock" value="true" checked/>Out of stock<br/>
+  					  <input type="radio" name="outOfStock" value="false"/>In Stock<br/><br/>
+		  <input type="submit" value="Submit">
+		</form>
+		</p>
+	</div>
