@@ -1,0 +1,15 @@
+<h1>The Burger Shop</h1>
+	<div class = "two-columns">
+		<table cellpadding="5">
+		  <h2><b>Order a Burger</b></h2>
+
+
+	<form action="orderBurger" method="POST">
+		{{#each list}}
+		  <input type="checkbox" name = "ingreds" value="{{name}}" {{disabled}}> {{name}} (${{price}})<br>
+		{{/each}}
+		<input type="submit" value="Order Burger">
+	</form>
+
+	</div>
+	
