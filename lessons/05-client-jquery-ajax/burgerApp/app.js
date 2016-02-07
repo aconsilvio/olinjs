@@ -29,9 +29,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.get('/', index);
 app.get('/ingredients', ingredients.listAll);
+app.get('/order', order.listAll);
 
 app.post('/ingredients', ingredients.addNewEdit);
 app.post('/removeOutOfStock', ingredients.removeOutOfStock);
+app.post('/orderBurger', order.orderBurger);
 
 // app.get('/kitchen', kitchen);
 // app.get('/order', order);

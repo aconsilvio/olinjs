@@ -1,6 +1,7 @@
 var $form = $("#ajax-form");
 var $remove = $("#removeLink");
 var $edit = $("#editStock");
+var $order = $("#orderBurger");
 
 var onSuccess = function(data, status) {
   var $ingredients = $(".ingredients");
@@ -15,7 +16,6 @@ var onSuccess = function(data, status) {
       break;
     } else{
       var $tempIngredient = $ingredients.first().clone();
-      // var name = $tempIngredient.children(".outOfStock").first();
       $tempIngredient.children(".name").html(data.name);
       $tempIngredient.children(".price").html('$' + data.price);
       $tempIngredient.children(".outOfStock").text(data.outOfStock);
@@ -37,14 +37,9 @@ var onRemove = function(data, status) {
   })  
 };
 
-var onEdit = function(data, status) {
-  //select edit buttom and make it submit
-  //make other things forms
-
+var sendBurger = function(data, status) {
   var $ingredients = $(".ingredients");
-  
 };
-
 
 var onError = function(data, status) {
   console.log("status", status);
@@ -66,5 +61,14 @@ $remove.submit(function(event){
 
   $.post("removeOutOfStock", formData)
     .done(onRemove)
+    .error(onError);
+})
+
+$order.submit(function(event){
+  event.preventDefault();
+  formData = $form.serialize();
+
+  $.post("orderBurger", formData)
+    .done(sendBurger)
     .error(onError);
 })

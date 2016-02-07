@@ -6,13 +6,9 @@
 var express = require('express');
 var path = require('path');
 var Ingredient = require(path.join(__dirname,'../models/models'));
-var Cat = require(path.join(__dirname,'../models/catModel'));
-// mongoose.connect('mongodb://localhost/Ingredient');
 
 var router = express.Router();
-// var ingredientSchema = require('../models/models.js')
 
-// var Ingredient = mongoose.model('Ingredient', ingredientSchema);
 
 var ingredients = {};
 
@@ -27,15 +23,9 @@ ingredients.listAll = function(req, res){
 	Ingredient.find({}, function(err, ingredientsList){
 
 		if (err) errorHandler(err,req,res);
-
-		//console.log(ingredientsList.length)
-		ingredientsList.forEach(function (ingredientItem){
-		})
-		// console.log("LOL", ingredientsObj)
-		// for(var i = 0; i < ingredientsObj.length; i++){
-		// 	listFull.push(ingredientsObj[i]);
-		// };
-	res.render('ingredients', {list: ingredientsList});
+			
+		ingredientsList.forEach(function (ingredientItem){});
+		res.render('ingredients', {list: ingredientsList});
 	});
 
 	
