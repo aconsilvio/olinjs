@@ -1,15 +1,19 @@
-<h1>The Burger Shop</h1>
+<h1><a href = "/">The Burger Shop</a></h1>
 	<div class = "two-columns">
-		<table cellpadding="5">
-		  <h2><b>Order a Burger</b></h2>
+		<h2 id = "header"><b>Order a Burger</b></h2>
 
 
-	<form action="orderBurger" method="POST">
+	<form id = "orderBurger" method="POST">
 		{{#each list}}
-		  <input type="checkbox" name = "ingreds" value="{{name}}" {{disabled}}> {{name}} (${{price}})<br>
+		  <input id = "{{_id}}" type="checkbox" class = "checkbox" name = "ingreds" price = "{{price}}" value="{{name}}" {{disabled}}> {{name}} (${{price}})<br>
 		{{/each}}
 		<input type="submit" value="Order Burger">
 	</form>
+	</div>
 
+	<div class = "two-columns">
+		<h2>Running total:</h2><h2 id = 'priceCountVal'></h2>
+		<br>
+		<h2 class = "priceMessage"></h2>
 	</div>
 	

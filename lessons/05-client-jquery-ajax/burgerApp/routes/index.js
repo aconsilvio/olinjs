@@ -4,7 +4,7 @@ var router = express.Router();
 
 // /* GET home page. */
 router.get('/', function(req, res, next) {
-  	res.render('home', {'link': [
+  	res.render('index', {'link': [
 		'/ingredients',
 		'/order',
 		'/kitchen',
@@ -12,4 +12,4 @@ router.get('/', function(req, res, next) {
 	})
 });
 
-module.exports.home = router;
+module.exports = router;

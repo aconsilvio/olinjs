@@ -1,0 +1,23 @@
+<h1><a href = "/">The Burger Shop</a></h1>
+	<div class = "two-columns">
+		<h2><b>Order a Burger</b></h2>
+
+
+	<form id = "removeOrder" method="POST">
+		{{#each list}}
+		 <input id = "removeOrderInput" type="checkbox" name = "ingreds" value="{{_id}}">
+		 <ul id = "orderMakeup"> 
+		  <li>${{price}}</li> 
+		  {{#each ingredients}}
+		  <li>{{name}}</li>
+		  {{/each}}
+		</ul>
+		{{/each}}
+		<input type="submit" value="Order up!">
+	</form>
+	</div>
+
+	<div class = "two-columns">
+
+	</div>
+	

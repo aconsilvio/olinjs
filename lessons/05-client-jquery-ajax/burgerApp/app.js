@@ -27,16 +27,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/', index);
+app.get('/', index);
 app.get('/ingredients', ingredients.listAll);
 app.get('/order', order.listAll);
+app.get('/kitchen', kitchen.listAll);
 
 app.post('/ingredients', ingredients.addNewEdit);
 app.post('/removeOutOfStock', ingredients.removeOutOfStock);
 app.post('/orderBurger', order.orderBurger);
+app.post('/removeOrder', kitchen.remove);
 
-// app.get('/kitchen', kitchen);
-// app.get('/order', order);
 
 
 var mongoURI = "mongodb://localhost/test";

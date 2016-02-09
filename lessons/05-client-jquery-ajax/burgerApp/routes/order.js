@@ -41,54 +41,25 @@ order.listAll = function(req, res){
 };
 
 order.orderBurger = function(req, res){
-	var ingredientsList = [];
 	var ingredients = req.body.ingreds;
-	console.log(ingredients);
+	console.log(ingredients)
+	var ingredientsInBurger = [];
+	var price = 0;
 	Ingredient.find({outOfStock: false}, function(err, ingredientsList){
-		for(var i = 0; i < ingredientsList.length; i++){
-			if(ingredientsList[i].name === ingredients[0]){
-				console.log('inside if')
+		for(var i = 0; i<ingredients.length; i++){
+			for(var j = 0; j < ingredientsList.length; j++){
+				if(ingredients[i] === ingredientsList[j].name){
+					ingredientsInBurger.push(ingredientsList[j])
+					price = price + ingredientsList[j].price;
+
+				}
 			}
 		}
+		var newOrder = new Order({ingredients:ingredientsInBurger, price:price.toFixed(2)});
+		newOrder.save(function(err, order){
+			res.json(order);
 		})
-	};
-
-// //gotta use AJAX
-// //this function will add a new ingredient if it does not exist in the database
-// //and it will update the ingredient if it is already in the database
-// order.addNewEdit = function(req, res){
-// 	var name = req.body.name;
-// 	var price = req.body.price;
-// 	var outOfStock = req.body.outOfStock;
-// 	console.log(name);
-// 	Ingredient.find({name: name}, function(err, ingredient){
-// 		if(ingredient.length !== 0){
-// 			if(ingredient[0].name === name){  //assumes there is only ingredient
-// 				Ingredient.update({name:name},{$set: {price: price, outOfStock:outOfStock}}, 
-// 					function(err, record){
-// 						Ingredient.find({name:name}, function(err, output){
-// 							console.log(output[0], 'output')
-// 							res.json(output[0])
-// 						})
-// 					}				
-// 				)
-// 			}
-// 		} else{
-// 			var newIngred = new Ingredient({name: name, price: price, outOfStock: outOfStock});
-// 			newIngred.save(function (err, ingredient){
-// 			res.json(ingredient)
-// 			});
-// 		}
-// 	})
-
-// }
-
-// order.removeOutOfStock = function(req, res){
-// 	Ingredient.find({outOfStock: true}, function(err, ingredients){
-// 		res.json(ingredients);
-// 	})
-
-// }
-
+	})
+};
 
 module.exports = order;

@@ -59,7 +59,7 @@ ingredients.addNewEdit = function(req, res){
 		} else{
 			var newIngred = new Ingredient({name: name, price: price, outOfStock: outOfStock});
 			newIngred.save(function (err, ingredient){
-			res.json(ingredient)
+				res.json(ingredient)
 			});
 		}
 	})
