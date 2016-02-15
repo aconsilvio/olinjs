@@ -1,0 +1,32 @@
+<h1 id = "loginlink" style="display:{{logoutFlag}}"><a href = "/login">Login</a></h1>
+		<form id="logoutbutton" action = "logout" method="POST" style="display:{{disFlag}}">
+			<input type="submit" value="Logout">
+		</form>
+		<h3 id = "logoutmessage"></h3>
+	
+	<div class = "column1" style="display:{{disFlag}}">
+		<div class = "loginform">
+			<form id="ajax-form" action = "newTwote" method="POST" user="{{user}}">
+			  Twote: <input type="text" name="text"/><br/> - <p id = "username">{{name}}</p>
+			  <br>
+			  <input type="submit" value="Submit">
+			</form>
+			</p>
+		</div>
+		<br>
+	<!-- <h1> You are logged in as {{name}}</h1> -->
+	{{#each list}}
+	<div class="twotes {{this.author}}" style="display:{{disFlag}}">
+		<p id = "twotetext">{{this.text}}</p>
+		<p id = "authortext">-{{this.author}}</p>
+		<button type="button" class="deleteButton" id = "{{this._id}}" style="display:none">Delete this twote.</button>
+	</div>
+	{{/each}}
+
+	</div>
+
+	<div class = "column2">
+		{{#each users}}
+		<div id = "{{this.name}}" class = "users">{{this.name}}</div>
+		{{/each}}
+	</div>

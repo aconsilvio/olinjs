@@ -1,0 +1,60 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+.column1
+{
+	width: 75%;
+	float: left;
+	padding: 1%;
+}
+.column2
+{
+	width: 20%;
+	float: left;
+	padding: 1%;
+}
+
+.two-columns
+{
+	width: 45%;
+	float: left;
+	padding: 1%;
+}
+
+.twotes{
+	background-color: #20B2AA;
+	font: 17px "Lucida Grande";
+	padding: 3%;
+	width: 80%;
+	margin: 3%;
+	color: white;
+
+}
+
+.users{
+	background-color: #20B2AA;
+	font: 17px "Lucida Grande";
+	padding: 3%;
+	width: 80%;
+	margin: 3%;
+	color: white;
+
+}
+
+#twotetext{
+	font-style: oblique;
+
+}
+
+#authortext{
+	font: 12px "Lucida Grande";
+	text-align: right;
+
+}
