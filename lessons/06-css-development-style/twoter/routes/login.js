@@ -19,34 +19,31 @@ users.show = function(req, res){
 	res.render('login')
 }
 
-users.login = function(req, res){
-	var name = req.body.name;
-	console.log(req.body, "body");
-	console.log(req.session, "session");
-	if (!req.session.user) {
-		req.session.user = name;
-		User.find({name: name}, function(err, user){
-			if(user.length ===0){
-				var newUser = new User({name:name, twotes:[]})
-				newUser.save(function(err, user){
-					res.json(newUser)
-				})
-			} else {
-			console.log(req.session.user, "SESSON USER")
-			res.json({name:req.session.user});
-			}
-		}
-	)}
-};
+
+//code from inital login (before passport)
+// users.login = function(req, res){
+// 	var name = req.body.name;
+// 	console.log(req.body, "body");
+// 	if (!req.session.user) {
+// 		req.user.name = name;
+// 		User.find({name: name}, function(err, user){
+// 			if(user.length ===0){
+// 				var newUser = new User({name:name, twotes:[]})
+// 				newUser.save(function(err, user){
+// 					res.json(newUser)
+// 				})
+// 			} else {
+// 			console.log(req.user.name, "SESSON USER")
+// 			res.json({name:req.user.name});
+// 			}
+// 		}
+// 	)}
+// };
 
 	
 users.logout = function(req, res){
-	if(req.session.user){
-		req.session.destroy(function(err){			
-			res.send('done')
-		});
-
-	}
+	req.logout();
+	res.redirect("/");
 }
 
 

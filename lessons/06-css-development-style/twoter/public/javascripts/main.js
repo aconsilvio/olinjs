@@ -6,16 +6,29 @@ var $logout = $("#logoutbutton");
 var onSuccess = function(data, status) {
   var $twotes = $(".twotes");
   var $tempTwote = $twotes.first().clone();
+  $tempTwote.removeClass().addClass("twotes " +data.author)
   $tempTwote.children("#twotetext").html(data.text);
   $tempTwote.children("#authortext").html("-"+data.author);
+  $tempTwote.attr("id", data._id);
   $twotes.first().before($tempTwote);
-};
 
+  $(".twotes").click(function(event){
+    var author = $(this).children("#authortext").attr("author");
+    var username = $("#username").text();
+    console.log(username)
+    if(author === username){
+      $(this).children().css("display", "block")
+    }
+  })
 
-var onLogin = function(data, status) {
-  var $message = $("#loginmessage");
-  console.log(data, 'THIS IS DATA HELLO')
-  $message.text(data.name + " is logged in.")
+  $(".deleteButton").click(function(event){
+    var button =  $(this);
+    var buttonId = $(this).parent().attr("id");
+    $.post("deleteTwote", {id:buttonId})
+    .done(function(data, status){
+      button.parent().remove();
+    }).error(onError);
+  })
 };
 
 var onLogout = function(data, status) {
@@ -30,19 +43,24 @@ var onError = function(data, status) {
   console.log("error", data);
 };
 
+// on hover select twotes by id in user
 $(".users").hover(function(event){
-  var name = $(this).attr("id");
-  $("." + name ).css("background-color", "#49A5CD");
+  var userTwoteIds = $(this).attr("twotes").split(",").join(", #");
+
+  var userTwotes = $(userTwoteIds);
+  userTwotes.css("background-color", "#14716c");
 
 }, function(event){
-  var name = $(this).attr("id");
-  $("." + name ).css("background-color", "#20B2AA");
+    var userTwoteIds = $(this).attr("twotes").split(",").join(", #");
+
+  var userTwotes = $(userTwoteIds);
+  userTwotes.css("background-color", "#20B2AA");
 
 })
 
 $(".deleteButton").click(function(event){
   var button =  $(this);
-  var buttonId = $(this).attr("id");
+  var buttonId = $(this).parent().attr("id");
   $.post("deleteTwote", {id:buttonId})
   .done(function(data, status){
     button.parent().remove();
@@ -50,8 +68,10 @@ $(".deleteButton").click(function(event){
 })
 
 $(".twotes").click(function(event){
+  var author = $(this).children("#authortext").attr("author");
   var username = $("#username").text();
- if($(this).attr("class").split(" ")[1] === username){
+  console.log(username)
+ if(author === username){
     $(this).children().css("display", "block")
  }
 })
@@ -65,15 +85,6 @@ $form.submit(function(event) {
     .error(onError);
 });
 
-$login.submit(function(event) {
-  event.preventDefault();
-  formData = $login.serialize();
-
-  $.post("login", formData)
-    .done(onLogin)
-    .error(onError);
-});
-
 $logout.submit(function(event) {
   event.preventDefault();
   formData = $login.serialize();
@@ -82,3 +93,22 @@ $logout.submit(function(event) {
     .done(onLogout)
     .error(onError);
 });
+
+
+//code from login without passport
+// $login.submit(function(event) {
+//   event.preventDefault();
+//   formData = $login.serialize();
+
+//   $.post("login", formData)
+//     .done(onLogin)
+//     .error(onError);
+// });
+
+
+
+// var onLogin = function(data, status) {
+//   var $message = $("#loginmessage");
+//   console.log(data, 'THIS IS DATA HELLO')
+//   $message.text(data.name + " is logged in.")
+// };

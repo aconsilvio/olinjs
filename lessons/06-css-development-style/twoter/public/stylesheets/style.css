@@ -1,12 +1,11 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Bitter", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00B7FF;
+  color: white;
 }
-
 
 .column1
 {
@@ -17,8 +16,48 @@ a {
 .column2
 {
 	width: 20%;
-	float: left;
+	float: right;
 	padding: 1%;
+	color: #20B2AA;
+	text-align: center;
+}
+
+/*http://www.sanwebe.com/2014/08/css-html-forms-designs
+*/
+.form-style-4 input[type=text]{
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed white;
+    width: 275px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+    color: white;
+    font: 15px "Bitter";
+    font-style: oblique;
+}
+
+.form-style-2 input[type=text]
+{
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed #20B2AA;
+    width: 275px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+    color: #20B2AA;
+    font: 15px "Bitter";
+}
+
+.form-style-2 input[type=password]
+{
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed #20B2AA;
+    width: 275px;
+    outline: none;
+    padding: 0px 0px 0px 0px;
+    color: #20B2AA;
+    font: 15px "Bitter";
 }
 
 .two-columns
@@ -30,21 +69,36 @@ a {
 
 .twotes{
 	background-color: #20B2AA;
-	font: 17px "Lucida Grande";
+	font: 17px "Bitter";
 	padding: 3%;
 	width: 80%;
 	margin: 3%;
 	color: white;
+	box-shadow: 3px 3px 2px #888888;
+
+}
+
+.twoteform{
+	background-color: #20B2AA;
+	font: 17px "Bitter";
+	padding: 3%;
+	width: 80%;
+	margin: 3%;
+	color: white;
+	box-shadow: 3px 3px 2px #888888;
 
 }
 
 .users{
 	background-color: #20B2AA;
-	font: 17px "Lucida Grande";
+	font: 17px "Bitter";
 	padding: 3%;
 	width: 80%;
 	margin: 3%;
 	color: white;
+	text-align: center;
+	box-shadow: 2px 2px 1px #888888;
+
 
 }
 
@@ -56,5 +110,61 @@ a {
 #authortext{
 	font: 12px "Lucida Grande";
 	text-align: right;
+
+}
+
+.header{
+	width: 100%;
+	background-color: #20B2AA;
+	min-height: 50px;
+	color: white;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	text-align: center;
+	font: 30px "Bitter";
+	box-shadow: 3px 3px 2px #888888;
+
+}
+
+.navleft{
+	width: 49%;
+	background-color: #20B2AA;
+	min-height: 50px;
+	color: white;
+	margin-top: 1%;
+	margin-right: 1%;
+	text-align: center;
+	font: 15px "Bitter";
+	float: left;
+	box-shadow: 3px 3px 2px #888888;
+
+}
+
+.facebook{
+	width: 40%;
+	background-color: #20B2AA;
+	min-height: 10px;
+	color: white;
+	padding: 1%;
+	margin-top: 1%;
+	margin-right: 1%;
+	margin-bottom: 1%;
+	text-align: center;
+	font: 15px "Bitter";
+	float: left;
+	box-shadow: 3px 3px 2px #888888;
+
+}
+
+.navright{
+	width: 50%;
+	background-color: #20B2AA;
+	min-height: 50px;
+	color: white;
+	margin-top: 1%;
+	text-align: center;
+	font: 15px "Bitter";
+	float: right;
+	box-shadow: 3px 3px 2px #888888;
 
 }

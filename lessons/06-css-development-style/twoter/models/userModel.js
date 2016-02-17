@@ -11,7 +11,8 @@ var twoteSchema = mongoose.Schema({
 
 var userSchema = mongoose.Schema({
     name: String,
-    twotes: [{type: Schema.ObjectId, ref:"Twote"}]
+    twotes: [{type: Schema.ObjectId, ref:"Twote"}],
+    password: String
 });
 
 

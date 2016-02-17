@@ -17,21 +17,24 @@ function errorHandler(err, req, res, next) {
 }
 
 twotes.listAll = function(req, res){
-	var user = req.query.user;
+	console.log("USER", req.user)
+	var user = req.user;
 
 	Twote.find({}, function(err, twoteList){
 		if (err) errorHandler(err,req,res);
 		User.find({}, function(err, user){
 			var flag;
 			var logoutFlag;
-			if(!req.session.user){
-				flag = "none"
-				logoutFlag = "block"
+			if(!req.user){
+				flag = "none";
+				logoutFlag = "block";
+				name = "";
 			} else{
-				flag = "block"
-				logoutFlag = "none"
+				flag = "block";
+				logoutFlag = "none";
+				name = req.user.name;
 			}
-		res.render('index', {list: twoteList.reverse(), users:user, name:req.session.user, disFlag:flag, logoutFlag: logoutFlag});
+		res.render('index', {list: twoteList.reverse(), users:user, name:name, disFlag:flag, logoutFlag: logoutFlag});
 
 		})
 	})
@@ -39,7 +42,7 @@ twotes.listAll = function(req, res){
 
 twotes.newTwote = function(req, res){
 	var text = req.body.text;
-	var name = req.session.user;
+	var name = req.user.name;
 	var author;
 	var date = Date.now()
 	var newTwote = new Twote({text:text, date:date, author:name});

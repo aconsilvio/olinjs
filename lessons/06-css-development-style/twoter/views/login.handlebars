@@ -1,8 +1,26 @@
+<div class ="header">
+	<h1>Twoter </h1>
+	<p>Like Twitter, but more confusing and less popular.</p>
+</div>
+
+<div class = "navleft">
+	<h1><a href = "/"> Home </a></h1>
+</div>
+
+<div class = "navright">
+	<h1 id = "loginlink" style="display:{{logoutFlag}}"><a href = "/login">Login</a></h1>
+</div>
 	<div class = "two-columns">
 		<h3> Login</h3>
-
-		<form id="login-form" action = "login" method="POST">
+		<div class = "facebook">
+		<a href = "/auth/facebook"> Log in with Facebook </a>
+		</div>
+		<br><br>
+		<p> or </p>
+		<form class = "form-style-2" id="login-form" action = "/loginLocal" method="POST">
 		  Name: <input type="text" name="name"/><br/>
+		  Password: <input type="password" name="password"/><br/>
+
 		  <input type="submit" value="Login">
 		</form><br>
 		<h3 id = "loginmessage"></h3>
