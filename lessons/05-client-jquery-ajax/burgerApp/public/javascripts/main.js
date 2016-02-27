@@ -33,22 +33,43 @@ var onRemove = function(data, status) {
 
   data.forEach(function(ingredient){
     for(var i = 0; i < $ingredients.length; i++){
-      if ($ingredients.eq(i).children('.name').text() === ingredient.name){ 
+      if ($ingredients.eq(i).children('.name').text() === ingredient.name){
         $ingredients.eq(i).remove();
       }
     }
-  })  
+  })
 };
 
 var onRemoveOrder = function(data, status) {
+  /* It looks like you're defining the input with the id "removeOrderInput" and the
+     ul with the id "orderMakeup" in an {{#each}} Handlebars helper (views/kitchen.handlebars).
+
+     Ids are supposed to appear only once on the page -- and you have as many things
+     with the same id as you have orders.
+
+     That's why you can only delete the first order on the page -- the selector
+     $("#removeOrderInput") looks for the *one* item with id "removeOrderInput", it
+     finds the first one, and it doesn't even consider that there might be more.
+
+     So no matter which order you mark removed, the first one will always be removed.
+
+     It looks like you're already:
+     1) sending the order mongo id (_id) to the server in the initial ajax request
+     2) deleting the order with that id in the server
+     3) responding with res.json({id: selectedId}) (routes/kitchen.js)
+
+     So most of the infrastructure you need to check off any order is in place.
+     4) You should have access to the mongo id in this function -- data.id
+        All you have to do is use jQuery to look for the input whose value matches
+        the mongo id and remove it.
+        I think the selector will look something like $('input[value=' + data.id + ']');
+   */
   var $rmOrderInput = $("#removeOrderInput");
-  console.log(data, 'data')
-  console.log($rmOrderInput.val(), '$rmOrderInput')
   if(data === $rmOrderInput.val()){
-    $('#orderMakeup').remove(); 
-    $rmOrderInput.remove(); 
+    $('#orderMakeup').remove();
+    $rmOrderInput.remove();
   }
-  
+
 };
 
 var sendBurger = function(data, status) {
