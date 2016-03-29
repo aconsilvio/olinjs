@@ -3,9 +3,10 @@ var $login = $("#login-form");
 var $loginlink = $("#loginlink");
 var $logout = $("#logoutbutton");
 
+//This is actually really good. Reactive inferaces with jquery require more code, which is why frontend frameworks exist. 
 var onSuccess = function(data, status) {
   var $twotes = $(".twotes");
-  var $tempTwote = $twotes.first().clone();
+  var $tempTwote = $twotes.first().clone();//This only works if there is already a tweet
   $tempTwote.removeClass().addClass("twotes " +data.author)
   $tempTwote.children("#twotetext").html(data.text);
   $tempTwote.children("#authortext").html("-"+data.author);
