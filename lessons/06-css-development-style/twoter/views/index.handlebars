@@ -1,0 +1,45 @@
+<div class ="header">
+	<h1>Twoter </h1>
+	<p>Like Twitter, but more confusing and less popular.</p>
+</div>
+
+<div class = "navleft">
+	<h1><a href = "/"> Home </a></h1>
+</div>
+
+<div class = "navright">
+	<h1 id = "loginlink" style="display:{{logoutFlag}}"><a href = "/login">Login</a></h1>
+	<form id="logoutbutton" action = "logout" method="POST" style="display:{{disFlag}}">
+		<h1><a href = "#" onclick="document.getElementById('logoutbutton').submit();"> Logout </a></h1>
+	</form>
+</div>
+	
+	<div class = "column1" style="display:{{disFlag}}">
+		<h3 id = "logoutmessage"></h3>
+		<div class = "loginform">
+			<div class = "twoteform">
+			<form id="ajax-form" action = "newTwote" method="POST" user="{{user}}" class = "form-style-4">
+			  Twote: <input type="text" name="text" id ="" /> <br> <p id = "username">{{name}}</p>
+			  <br>
+			  <input type="submit" value="Submit">
+			</form>
+			</div>
+		</div>
+		<br>
+	<!-- <h1> You are logged in as {{name}}</h1> -->
+	{{#each list}}
+	<div class="twotes" id="{{this._id}}" style="display:{{disFlag}}">
+		<p id = "twotetext">{{this.text}}</p>
+		<p id = "authortext" author = "{{this.author}}">-{{this.author}}</p>
+		<button type="button" class="deleteButton" style="display:none">Delete this twote.</button>
+	</div>
+	{{/each}}
+
+	</div>
+
+	<div class = "column2">
+		<h1> Users </h1>
+		{{#each users}}
+		<div  class = "users"  twotes="#{{this.twotes}}">{{this.name}}</div>
+		{{/each}}
+	</div>
