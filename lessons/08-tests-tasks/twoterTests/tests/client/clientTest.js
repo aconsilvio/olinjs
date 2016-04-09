@@ -1,4 +1,4 @@
-require('./../../../app'); // to connect to the database
+require('./../../app'); // to connect to the database
 
 describe("A test suite", function() {
 	// Synchronous
